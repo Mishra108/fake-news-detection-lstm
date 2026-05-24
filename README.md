@@ -13,11 +13,7 @@ Built with:
 
 ## 🚀 Live Demo
 
-👉 Add your Streamlit link here:
-
-```md id="g7m2qx"
-[https://your-app-name.streamlit.app](https://mishra108-fake-news-detection-lstm-app-zqbhzb.streamlit.app/)
-```
+🔗 [Click Here to Open App]((https://mishra108-fake-news-detection-lstm-app-zqbhzb.streamlit.app/))
 
 ---
 
