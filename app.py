@@ -2,25 +2,29 @@ import streamlit as st
 import joblib
 import re
 import nltk
+import tensorflow as tf
 
 from nltk.corpus import stopwords
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
-# Load model
-model = load_model("fake_news_lstm_model.h5")
+# Download stopwords
+nltk.download('stopwords')
 
 # Load tokenizer
 tokenizer = joblib.load("tokenizer.pkl")
 
+# Load model
+model = load_model("fake_news_lstm_model.h5", compile=False)
+
 # Stopwords
-nltk.download('stopwords')
 stop_words = set(stopwords.words('english'))
 
-# Text cleaning
+# Clean text
 def clean_text(text):
     text = text.lower()
-    text = re.sub(r'http\\S+', '', text)
+
+    text = re.sub(r'http\S+', '', text)
     text = re.sub(r'[^a-zA-Z]', ' ', text)
 
     words = text.split()
@@ -29,7 +33,7 @@ def clean_text(text):
 
     return " ".join(words)
 
-# Prediction function
+# Predict function
 def predict_news(news):
 
     news = clean_text(news)
@@ -38,20 +42,26 @@ def predict_news(news):
 
     padded = pad_sequences(seq, maxlen=300)
 
-    prediction = model.predict(padded)[0][0]
+    prediction = model.predict(padded)
 
-    return prediction
+    return prediction[0][0]
 
-# Streamlit UI
+# UI
 st.title("📰 Fake News Detection System")
+
+st.write("Enter a news article to check whether it is Real or Fake.")
 
 news_input = st.text_area("Enter News Article")
 
 if st.button("Predict"):
 
-    pred = predict_news(news_input)
-
-    if pred > 0.5:
-        st.success(f"🟢 REAL NEWS\nConfidence: {pred:.4f}")
+    if news_input.strip() == "":
+        st.warning("Please enter some news text.")
     else:
-        st.error(f"🔴 FAKE NEWS\nConfidence: {pred:.4f}")
+
+        pred = predict_news(news_input)
+
+        if pred > 0.5:
+            st.success(f"🟢 REAL NEWS\n\nConfidence: {pred:.4f}")
+        else:
+            st.error(f"🔴 FAKE NEWS\n\nConfidence: {pred:.4f}")
