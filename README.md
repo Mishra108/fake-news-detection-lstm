@@ -16,7 +16,7 @@ Built with:
 👉 Add your Streamlit link here:
 
 ```md id="g7m2qx"
-https://your-app-name.streamlit.app
+[https://your-app-name.streamlit.app](https://mishra108-fake-news-detection-lstm-app-zqbhzb.streamlit.app/)
 ```
 
 ---
