@@ -13,7 +13,7 @@ Built with:
 
 ## 🚀 Live Demo
 
-🔗 [Click Here to Open App]((https://mishra108-fake-news-detection-lstm-app-zqbhzb.streamlit.app/))
+👉 [Click Here to Use the App](https://mishra108-fake-news-detection-lstm-app-zqbhzb.streamlit.app/)
 
 ---
 
@@ -46,10 +46,10 @@ This project uses:
 fake-news-detection-lstm/
 │
 ├── app.py
-├── train.py
-├── model.h5
+├── fake_news_lstm_model.h5
 ├── tokenizer.pkl
 ├── requirements.txt
+├── runtime.txt
 └── README.md
 ```
 
